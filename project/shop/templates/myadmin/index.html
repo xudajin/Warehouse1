@@ -201,8 +201,12 @@
 
             <!-- 菜单 -->
             <ul class="sidebar-nav">
-                
-                
+                <li class="sidebar-nav-link">
+                    <a href="{% url 'myadmin_index' %}">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                    </a>
+                </li>
+                  
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 用户管理
@@ -214,9 +218,32 @@
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 会员列表
                             </a>
                         </li>
-
-                        
+                        <li class="sidebar-nav-link">
+                            <a href="{% url 'myadmin_adduser' %}">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加用户
+                            </a>
+                        </li>                       
                     </ul>
+
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 商品管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="{% url 'myadmin_catelist' %}">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 分类列表
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="{% url 'myadmin_addcate' %}">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加分类
+                            </a>
+                        </li>                       
+                    </ul>
+
+                    
             </ul>
         </div>
 
@@ -224,7 +251,7 @@
         <!-- 内容区域 -->
         <div class="tpl-content-wrapper">
         {% block cont %}
-            dfafdsfafdddad
+            首页
         {% endblock %}
         </div>
     </div>

@@ -16,3 +16,17 @@ class Users(models.Model):
     # 0 正常 1   2
 	status = models.IntegerField(default=0)
 	addtime=models.DateTimeField(auto_now_add=True)
+
+
+
+
+
+# 商品的类别
+class Cates(models.Model):  
+    name = models.CharField(max_length=50)
+    upid = models.IntegerField()
+    paths = models.CharField(max_length=50)
+
+
+
+

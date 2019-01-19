@@ -3,26 +3,25 @@
 {% block cont %}
 
 <div class="row-content am-cf">
-                <div class="row">
-                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
-                        <div class="widget am-cf">
-                            <div class="widget-head am-cf">
-                                <div class="widget-title  am-cf">文章列表</div>
-                            </div>
-                            <div class="widget-body  am-fr">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title  am-cf">文章列表</div>
+                </div>
+                <div class="widget-body  am-fr">
 
-                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
-                                    <div class="am-form-group">
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span><a href="{% url 'myadmin_adduser' %}">新增</a></button>
-                                                <button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
-                                                <button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>
-                                                <button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                        <div class="am-form-group">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span><a href="{% url 'myadmin_adduser' %}">新增</a></button>
+                                    <button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
+                                    <button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                     <form action="">
                         <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
                             <div class="am-form-group tpl-table-list-select">
@@ -45,86 +44,86 @@
                     </form>
 
 
-                                <div class="am-u-sm-12">
-                                    <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
-                                        <thead>
-                                            <tr>
-                                                <!-- <th>ID</th>
-                                                <th>头像</th>
-                                                <th>姓名</th>
-                                                <th>年龄</th>
-                                                <th>性别</th>
-                                                <th>手机号</th>
-                                                <th>状态</th>
-                                                <th>添加时间</th>
-                                                <th>操作</th> -->
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for i in userinfo %}
-                                            <tr class="gradeX">                                            
-                                                <td>{{i.id}}</td>
-                                                <td><img src="{{i.head_url}}" style="width:50px"></td>
-                                                <td>{{i.username}}</td>
-                                                <td>{{i.age}}</td>
-                                                <td>{{i.sex}}</td>
-                                                <td>{{i.phone}}</td>  
-                                                <td>
-                                                    <select style="background:pink" class="changes" uid="{{i.id}}">
-                                                        <option {% if i.status == 0 %}selected {% endif %} value="0">正常</option>
-                                                        <option {% if i.status == 1 %}selected {% endif %} value="1">禁用</option>
-                                                    </select>
-                                                </td>
-                                                
-                                                 <td>{{i.addtime}}</td>
-                                                
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="{% url 'myadmin_edituser' %}?id={{i.id}}">
-                                                            <i class="am-icon-pencil"></i> 修改
-                                                        </a>
-                                                        <a href="{% url 'myadmin_deluser' %}?id={{i.id}}"  class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                         <a href="{% url 'myadmin_respwd' %}?id={{i.id}}"  class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 重置密码
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                            <script type="text/javascript">
-                                            $('.changes').change(function(){
-                                                var uid = $(this).attr('uid')
-                                                var val = $(this).val()
-                                                $.get('{% url 'myadmin_changes' %}',{uid:uid,status:val},function(data){
-                                                    alert(data.msg)
-                                                },'json')
-                                            })
-                                        </script>
-                                            <!-- more data -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="am-u-lg-12 am-cf">
-                                    <div class="am-fr">
-                                        <ul class="am-pagination tpl-pagination">
-                                            <li ><a href="{% url 'myadmin_vipuser' %}?p=1&type={{request.GET.type}}&search={{request.GET.search}}">首页</a></li>
+                    <div class="am-u-sm-12">
+                        <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
+                            <thead>
+                                <tr>
+                                   <!--  <th>ID</th>
+                                    <th>头像</th>
+                                    <th>姓名</th>
+                                    <th>年龄</th>
+                                    <th>性别</th>
+                                    <th>手机号</th>
+                                    <th>状态</th>
+                                    <th>添加时间</th>
+                                    <th>操作</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in userinfo %}
+                                <tr class="gradeX">                                            
+                                    <td>{{i.id}}</td>
+                                    <td><img src="{{i.head_url}}" style="width:50px"></td>
+                                    <td>{{i.username}}</td>
+                                    <td>{{i.age}}</td>
+                                    <td>{{i.sex}}</td>
+                                    <td>{{i.phone}}</td>  
+                                    <td>
+                                        <select style="background:pink" class="changes" uid="{{i.id}}">
+                                            <option {% if i.status == 0 %}selected {% endif %} value="0">正常</option>
+                                            <option {% if i.status == 1 %}selected {% endif %} value="1">禁用</option>
+                                        </select>
+                                    </td>
 
-                                            <li {% if page == 1 %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:-1}}&type={{request.GET.type}}&search={{request.GET.search}}">«</a></li>
-                                            {% for i in prange %}
-                                            <li {% if page == i %} class="am-active" {% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{i}}&type={{request.GET.type}}&search={{request.GET.search}}">{{i}}</a></li>
-                                            {% endfor %}
-                                            <li {% if page == sumpage %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:1}}&type={{request.GET.type}}&search={{request.GET.search}}">»</a></li>
+                                    <td>{{i.addtime}}</td>
 
-                                            <li ><a href="{% url 'myadmin_vipuser' %}?p={{sumpage}}&type={{request.GET.type}}&search={{request.GET.search}}">尾页</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                                    <td>
+                                        <div class="tpl-table-black-operation">
+                                            <a href="{% url 'myadmin_edituser' %}?id={{i.id}}">
+                                                <i class="am-icon-pencil"></i> 修改
+                                            </a>
+                                            <a href="{% url 'myadmin_deluser' %}?id={{i.id}}"  class="tpl-table-black-operation-del">
+                                                <i class="am-icon-trash"></i> 删除
+                                            </a>
+                                            <a href="{% url 'myadmin_respwd' %}?id={{i.id}}"  class="tpl-table-black-operation-del">
+                                                <i class="am-icon-trash"></i> 重置密码
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <script type="text/javascript">
+                                    $('.changes').change(function(){
+                                        var uid = $(this).attr('uid')
+                                        var val = $(this).val()
+                                        $.get('{% url 'myadmin_changes' %}',{uid:uid,status:val},function(data){
+                                            alert(data.msg)
+                                        },'json')
+                                    })
+                                </script>
+                                <!-- more data -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="am-u-lg-12 am-cf">
+                        <div class="am-fr">
+                            <ul class="am-pagination tpl-pagination">
+                                <li ><a href="{% url 'myadmin_vipuser' %}?p=1&type={{request.GET.type}}&search={{request.GET.search}}">首页</a></li>
+
+                                <li {% if page == 1 %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:-1}}&type={{request.GET.type}}&search={{request.GET.search}}">«</a></li>
+                                {% for i in prange %}
+                                <li {% if page == i %} class="am-active" {% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{i}}&type={{request.GET.type}}&search={{request.GET.search}}">{{i}}</a></li>
+                                {% endfor %}
+                                <li {% if page == sumpage %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:1}}&type={{request.GET.type}}&search={{request.GET.search}}">»</a></li>
+
+                                <li ><a href="{% url 'myadmin_vipuser' %}?p={{sumpage}}&type={{request.GET.type}}&search={{request.GET.search}}">尾页</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
