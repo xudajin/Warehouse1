@@ -16,14 +16,11 @@ def tab():
 
 
 
-
-
 def addcate(request):
 	if request.method == 'GET':
 		cates=models.Cates.objects.all()
 		print(cates)
 		return render(request,'myadmin/cate/addcate.html',{"cates":cates})
-
 	elif request.method == 'POST':
 		pid=request.POST.get('pid')
 		name=request.POST.get('name')

@@ -1,7 +1,6 @@
 {% extends 'myadmin/index.html' %}
 
 {% block cont %}
-
 <div class="row-content am-cf">
                 <div class="row">
                     <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -15,8 +14,7 @@
                                     <div class="am-form-group">
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
-                                                <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span><a href="{% url 'myadmin_addcate' %}">新增</a></button>
-                                                <button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>     
+                                                <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span><a href="{% url 'myadmin_addcate' %}">新增</a></button>     
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +85,6 @@
                                                     },'json')
                                                 })
 
-
                                                 $('.dbl').dblclick(function(){
                                                 // 获取当前单机的标签
                                                 var sp = $(this).find('span')
@@ -136,10 +133,13 @@
                                         <ul class="am-pagination tpl-pagination">
                                             <li ><a href="{% url 'myadmin_vipuser' %}?p=1&type={{request.GET.type}}&search={{request.GET.search}}">首页</a></li>
 
+
                                             <li {% if page == 1 %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:-1}}&type={{request.GET.type}}&search={{request.GET.search}}">«</a></li>
+
                                             {% for i in prange %}
                                             <li {% if page == i %} class="am-active" {% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{i}}&type={{request.GET.type}}&search={{request.GET.search}}">{{i}}</a></li>
                                             {% endfor %}
+                                            
                                             <li {% if page == sumpage %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:1}}&type={{request.GET.type}}&search={{request.GET.search}}">»</a></li>
 
                                             <li ><a href="{% url 'myadmin_vipuser' %}?p={{sumpage}}&type={{request.GET.type}}&search={{request.GET.search}}">尾页</a></li>

@@ -17,6 +17,7 @@ from django.conf.urls import url,include
 from django.contrib import admin
 
 urlpatterns = [
+	url(r'^ueditor/', include('ueditor.urls')),
     url(r'^', include("myadmin.urls")),
     url(r'^home/', include("myhome.urls")),
 

@@ -19,7 +19,6 @@ def vipuser(request):
             #根据id username phone
             # select * from myadmin_users where id like %search% or username like %search% or phone like %search%
 			from django.db.models import Q
-
 			userinfo = models.Users.objects.filter(Q(id__contains=search)|Q(username__contains=search)|Q(phone__contains=search))
 		elif types=='uname':
 			userinfo = models.Users.objects.filter(username__contains=search)
@@ -30,16 +29,13 @@ def vipuser(request):
 
 	 # 实例化分页对象
 	p = Paginator(userinfo, 10)
-
     #一共可以分多少页
 	sumpage=p.num_pages
-
     # 取第几页的数据
     # 接受用户的页码
 	page = int(request.GET.get('p',1))
     # 第几页的数据
 	page1 = p.page(page)
-
     # 判断 如果用输入的页码<=3 显示前五个页码
 	if page<=3:
         # 页码的迭代序列  [1,2,3,4,5,6,7]
@@ -122,9 +118,6 @@ def changes(request):
 	except:
 		msg={'msg':'修改失败'}
 		return JsonResponse(msg)
-
-
-
 
 		
 def upload(myfile):
