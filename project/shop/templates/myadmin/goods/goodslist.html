@@ -24,9 +24,9 @@
                             <div class="am-form-group tpl-table-list-select">
                                 <select name="type" data-am-selected="{btnSize: 'sm'}" style="display: none;">
                                     <option {% if request.GET.type == 'all' %}selected {% endif %} value="all">所有类别</option>
-                                    <option {% if request.GET.type == 'uid' %}selected {% endif %} value="uid">ID</option>
-                                    <option {% if request.GET.type == 'uname' %}selected {% endif %} value="uname">用户名</option>
-                                    <option {% if request.GET.type == 'uphone' %}selected {% endif %} value="uphone">手机号</option>       
+                                    <option {% if request.GET.type == 'title' %}selected {% endif %} value="title">商品名称</option>
+                                    <option {% if request.GET.type == 'price' %}selected {% endif %} value="price">商品价格</option>
+                                    <option {% if request.GET.type == 'ordernum' %}selected {% endif %} value="ordernum">商品库存</option>       
                                 </select>
                             </div>
                         </div>
@@ -102,15 +102,15 @@
                     <div class="am-u-lg-12 am-cf">
                         <div class="am-fr">
                             <ul class="am-pagination tpl-pagination">
-                                <li ><a href="{% url 'myadmin_vipuser' %}?p=1&type={{request.GET.type}}&search={{request.GET.search}}">首页</a></li>
+                                <li ><a href="{% url 'myadmin_goodslist' %}?p=1&type={{request.GET.type}}&search={{request.GET.search}}">首页</a></li>
 
-                                <li {% if page == 1 %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:-1}}&type={{request.GET.type}}&search={{request.GET.search}}">«</a></li>
+                                <li {% if page == 1 %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_goodslist' %}?p={{page|add:-1}}&type={{request.GET.type}}&search={{request.GET.search}}">«</a></li>
                                 {% for i in prange %}
-                                <li {% if page == i %} class="am-active" {% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{i}}&type={{request.GET.type}}&search={{request.GET.search}}">{{i}}</a></li>
+                                <li {% if page == i %} class="am-active" {% endif %}><a href="{% url 'myadmin_goodslist' %}?p={{i}}&type={{request.GET.type}}&search={{request.GET.search}}">{{i}}</a></li>
                                 {% endfor %}
-                                <li {% if page == sumpage %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_vipuser' %}?p={{page|add:1}}&type={{request.GET.type}}&search={{request.GET.search}}">»</a></li>
+                                <li {% if page == sumpage %}class="am-disabled"{% endif %}><a href="{% url 'myadmin_goodslist' %}?p={{page|add:1}}&type={{request.GET.type}}&search={{request.GET.search}}">»</a></li>
 
-                                <li ><a href="{% url 'myadmin_vipuser' %}?p={{sumpage}}&type={{request.GET.type}}&search={{request.GET.search}}">尾页</a></li>
+                                <li ><a href="{% url 'myadmin_goodslist' %}?p={{sumpage}}&type={{request.GET.type}}&search={{request.GET.search}}">尾页</a></li>
                             </ul>
                         </div>
                     </div>

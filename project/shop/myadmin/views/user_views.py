@@ -72,7 +72,7 @@ def deluser(request):
 	userinfo =models.Users.objects.get(id=uid)
 	userinfo.status= 3
 	userinfo.save()
-	return HttpResponse(("<script>alert('删除成功！');location.href='/vipuser/'</script>"))
+	return HttpResponse(("<script>alert('删除成功！');location.href='/myadmin/vipuser/'</script>"))
 
 
 def edituser(request):
@@ -95,7 +95,7 @@ def edituser(request):
 			headurl=upload(file)
 			uinfo.head_url=headurl
 		uinfo.save()
-		return HttpResponse(("<script>alert('修改成功！');location.href='/vipuser/'</script>"))
+		return HttpResponse(("<script>alert('修改成功！');location.href='/myadmin/vipuser/'</script>"))
 
 
 def respwd(request):
@@ -103,7 +103,7 @@ def respwd(request):
 	user=models.Users.objects.get(id=uid)
 	user.password = make_password('123456', None, 'pbkdf2_sha256')
 	user.save()
-	return HttpResponse(("<script>alert('重置成功！');location.href='/vipuser/'</script>"))
+	return HttpResponse(("<script>alert('重置成功！');location.href='/myadmin/vipuser/'</script>"))
 
 def changes(request):
     # 获取uid 获取状态值

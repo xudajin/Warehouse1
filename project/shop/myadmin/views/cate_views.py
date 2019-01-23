@@ -39,7 +39,7 @@ def addcate(request):
 			c.upid=pobj.id
 			c.paths=pobj.paths+pid+','
 			c.save()
-		return HttpResponse(('<script>alert("添加成功");location.href="/addcate/"</script>'))
+		return HttpResponse(('<script>alert("添加成功");location.href="/myadmin/addcate/"</script>'))
 
 
 def catelist(request):

@@ -22,13 +22,16 @@ urlpatterns = [
 
 
 
-
-
     url(r'^addgoods/$',goods_views.addgoods,name='myadmin_addgoods'),
     url(r'^goodsinsert/$', goods_views.goodsinsert,name='myadmin_goodsinsert'),
     url(r'^goodslist/$',goods_views.goodslist,name='myadmin_goodslist'),
     url(r'^delgoods/$',goods_views.delgoods,name='myadmin_delgoods'),
     url(r'^editgoods/$',goods_views.editgoods,name='myadmin_editgoods'),
+
+
+    url(r'^logoin/$', index_views.myadminLogin,name='myadmin_login'),
+    url(r'^verifycode/$', index_views.verifycode,name='myadmin_yzm'),
+    url(r'^outlogin/$', index_views.outlogin,name='myadmin_out'),
 
 
 

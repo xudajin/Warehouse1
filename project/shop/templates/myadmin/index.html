@@ -50,7 +50,7 @@
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="javascript:;">欢迎你, <span>Amaze UI</span> </a>
+                            <a href="javascript:;">欢迎你, <span>{{request.session.adminuser.vipuser}}</span> </a>
                         </li>
 
                         <!-- 新邮件 -->
@@ -160,7 +160,7 @@
 
                         <!-- 退出 -->
                         <li class="am-text-sm">
-                            <a href="javascript:;">
+                            <a href="{% url 'myadmin_out' %}">
                                 <span class="am-icon-sign-out"></span> 退出
                             </a>
                         </li>

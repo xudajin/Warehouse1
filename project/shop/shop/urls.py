@@ -18,8 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
 	url(r'^ueditor/', include('ueditor.urls')),
-    url(r'^', include("myadmin.urls")),
-    url(r'^home/', include("myhome.urls")),
+    url(r'^myadmin/', include("myadmin.urls")),
+    url(r'^', include("myhome.urls")),
 
 
 ]
