@@ -156,3 +156,16 @@ def createorder(request):
 	order.total = total
 	order.save()
 	return HttpResponse('<script>alert("ok");location.href="'+reverse('myhome_index')+'"</script>')
+
+
+
+
+
+
+def deladdr(request):
+	delid =request.GET.get('delid')
+	print(delid)
+	address = models.Address.objects.get(id=delid)
+	address.delete()
+
+	return JsonResponse({'error':0,'msg':'删除成功'})

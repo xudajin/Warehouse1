@@ -277,7 +277,7 @@
 			var delid =$(this).attr('num')
 			console.log(delid)
 			$.get('{% url "myhome_delcar" %}',{"delid":delid},function(data){
-				if(data["error"]=1){
+				if(data["error"]==1){
 					del.parents('tr').remove()
 					total()
 

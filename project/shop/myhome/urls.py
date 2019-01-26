@@ -27,6 +27,9 @@ urlpatterns = [
 
     url(r'^createorder/$', info_views.createorder,name='myhome_createorder'),
 
+    url(r'^deladdr/$', info_views.deladdr,name='myhome_deladdr'),
+
+
 
 
 

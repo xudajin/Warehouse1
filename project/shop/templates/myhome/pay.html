@@ -111,7 +111,7 @@
                                     <span class="new-addr-bar hidden">|</span>
                                     <a href="#">编辑</a>
                                     <span class="new-addr-bar">|</span>
-                                    <a href="javascript:void(0);" onclick="delClick(this);">删除</a>
+                                    <a href="javascript:void(0)" class="deladdr1" delid="{{i.id}}">删除</a>
                                 </div>
                             </li>
                             <div class="per-border"></div>
@@ -260,7 +260,7 @@
                                         <div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
                                             <span class="price g_price ">
                                                 <span>¥</span> 
-                                                <em class="style-large-bold-red pay-sum" id="J_ActualFee">244.00</em>
+                                                <em class="style-large-bold-red pay-sum" id="J_ActualFee">0</em>
                                             </span>
                                         </div>
 
@@ -313,7 +313,6 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-
 
                 <!-- 尾部 -->
                 <div class="footer">
@@ -497,6 +496,16 @@
                     $('.suborder').submit()
                 })
 
+                $('.deladdr1').click(function(){
+                   var del =$(this)
+                   var delid = $(this).attr('delid')
+                   $.get('{% url "myhome_deladdr" %}',{delid:delid},function(data){
+                        if(data.error==0){
+                            console.log(typeof(data))
+                            del.parents('li').remove()
+                        }
+                   },'json')
+                })
 
 
 
