@@ -18,7 +18,7 @@ def myhome_login(request):
     if request.method == "GET":
         return render(request,'myhome/login.html')
 
-    elif request.method == "POST":
+    elif request.method == "POST": 
         user= request.POST.dict()
         phone=user["account"] 
         cphone = models.Users.objects.filter(phone=phone).count()

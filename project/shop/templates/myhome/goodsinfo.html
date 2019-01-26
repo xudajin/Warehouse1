@@ -29,7 +29,7 @@
           <!-- Tab panes -->
           <div class="tab-content preview-booth pt10">
             <div role="tabpanel" class="tab-pane active mod-pic" id="list-p1">
-              <img src="/static/myhome/public/img/mlx15.jpg" width="375" height="375" class="sImg">
+              <img src="{{ginfo.g_url}}" width="375" height="375" class="sImg">
             </div>
             <div role="tabpanel" class="tab-pane mod-pic" id="list-p2">
               <img src="/static/myhome/public/img/mlx2.jpg" width="375" height="375" class="sImg">
@@ -40,7 +40,7 @@
           </div>
 
           <!-- Nav tabs -->
-          <ul class="nav nav-tabs preview-thumb clearfix " role="tablist">
+          <!-- <ul class="nav nav-tabs preview-thumb clearfix " role="tablist">
             <li role="presentation" class="active">
               <a href="#list-p1" aria-controls="list-p1" role="tab" data-toggle="tab">
                 <img src="/static/myhome/public/img/mlx4.jpg" style="display: inline;" width="75" height="75">
@@ -56,14 +56,14 @@
                 <img src="/static/myhome/public/img/mlx6.jpg" style="display: inline;" width="75" height="75">
               </a>
             </li>
-          </ul>
+          </ul> -->
 
         </div>
       </div>
       <div class="col-md-7 col-sm-12 col-xs-12 pt10">
         <div class="property hidden-xs hidden-sm" id="property">
              <div class="property-hd">
-                   <h1>魅蓝 X</h1>
+                   <h1>{{ginfo.title}}</h1>
                    <p class="mod-info active">32G直降200元 原价1699元 高清屏安全快充 </p>
              </div>
              <div class="property-sell">
@@ -73,7 +73,7 @@
                      <dd>
                          <div class="mod-price">
                              <small>¥</small>
-                             <span id="J_price" class="vm-money">1499.00</span>
+                             <span id="J_price" class="vm-money">{{ginfo.price}}</span>
                          </div>
                          <div class="mod-original" id="J_originalPrice" style="display:none;"></div>
                          <div class="mod-activity">
@@ -91,49 +91,7 @@
                          <a class="vm-more" data-mtype="store_de_coupon_more" id="J_promoMore" href="#">更多&gt;</a>
                      </dd>
                  </dl>
-             </div>
-          <div class="property-sibling">
-            <dl data-property="型号" class="property-sibling-item">
-              <dt class="vm-metatit">
-                     型<span class="s-space"></span><span class="s-space"></span>号：
-              </dt>
-              <dd class="clearfix">
-                <a href="#" data-itemid="10478" class="prop" data-mtype="store_de_sib_1">魅蓝 Max</a>
-                <a href="javascript:;" data-itemid="10636" class="prop selected" data-mtype="store_de_sib_2">魅蓝 X</a>
-              </dd>
-            </dl>
-          </div>
-          <div class="property-set">
-            <dl class="property-set-sale" data-property="网络类型">
-              <dt class="vm-metatit">网络类型：</dt>
-              <dd class="clearfix">
-                <a data-value="14:18238" data-mtype="store_de_sp_1_1" href="#" title="全网通公开版" class="selected">
-                  <span>全网通公开版</span>
-                </a>
-              </dd>
-            </dl>
-            <dl class="property-set-sale" data-property="颜色分类">
-              <dt class="vm-metatit">颜色分类：</dt>
-              <dd class="clearfix">
-                <a data-value="3:22218" class="vm-sale-img selected" data-mtype="store_de_sp_2_1" href="#" title="流光金">
-                  <img src="/static/myhome/public/img/vm4.png" width="32" height="32">
-                  <span>流光金</span>
-                </a>
-                <a data-value="3:22219" class="vm-sale-img" data-mtype="store_de_sp_2_2" href="#" title="珠光白">
-                  <img src="/static/myhome/public/img/vm5.png" width="32" height="32">
-                  <span>珠光白</span>
-                </a>
-            </dd>
-            </dl>
-            <dl class="property-set-sale" data-property="内存容量">
-                <dt class="vm-metatit">内存容量：</dt>
-                <dd class="clearfix">
-                    <a data-value="13:37" data-mtype="store_de_sp_3_1" href="#" title="32GB" class="selected">
-                      <span>32GB</span>
-                    </a>
-                </dd>
-            </dl>
-          </div>
+             </div>        
           <div class="property-service">
             <dl class="property-service-item clearfix">
                 <dt class="vm-metatit">支<span class="s-space"></span><span class="s-space"></span>持：
@@ -195,11 +153,39 @@
                     </div>
                 </dd>
             </dl>
+
+
             <div class="property-buy-action">
-                <a data-mtype="store_de_buy" href="javascript:void(0);" id="J_btnBuy" class="btn btn-danger btn-lg mr20">立即购买</a>
-                <a data-mtype="store_de_cart" href="javascript:void(0);" id="J_btnAddCart" class="btn btn-primary btn-lg hide" style="display:inline-block;"><i></i>加入购物车</a>
+                <a data-mtype="store_de_cart" info="{{request.session.userinfo}}"  href="#" id="J_btnAddCart" class="btn btn-primary btn-lg " style="display:inline-block;"><i></i>加入购物车</a>
                 <span class="vm-service" id="J_panicBuyingWrap"></span>
             </div>
+            <script type="text/javascript">
+                $('#J_btnAddCart').click(function(){
+                  var login = $(this).attr('info')
+                  if(!login){
+                    alert('请先登录')
+                    location.href='{% url "myhome_login" %}'
+                  }
+
+
+                  var gid = {{ginfo.id}};
+                  var num = $('#J_quantity').val()
+
+                  $.get('{% url "myhome_car" %}',{gid:gid,num:num},function(data){
+                    alert(data.info)
+                  })
+
+                })
+
+
+            </script>
+
+
+
+
+
+
+
           </div>
           <div class="prod-addition">
                 <input id="servertime" value="1503304001935" type="hidden">
@@ -351,18 +337,9 @@
       </div>
       <div class="detail-content container">
           <div class="introduce current" id="introduce">
-              <img src="/static/myhome/public/img/mlx7.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/mlx8.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/mlx9.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/mlx10.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/mlx11.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/mlx12.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/mlx13.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/mlx14.jpg" class="pc-detial-intr">
-              <img src="/static/myhome/public/img/app/m5.jpg" class="app-detial-intr">
-              <img src="/static/myhome/public/img/app/m8.jpg" class="app-detial-intr">
-              <img src="/static/myhome/public/img/app/m9.jpg" class="app-detial-intr">
-              <img src="/static/myhome/public/img/app/m6.jpg" class="app-detial-intr">
+              <div>
+                {{ginfo.ginfo | safe}}
+              </div>
           </div>
           <!-- 移动端图片 -->
 

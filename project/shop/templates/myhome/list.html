@@ -17,7 +17,7 @@
       <!-- 面包屑 导航 -->
       <div class="ml-nav hidden-xs hidden-sm">
             <ol class="breadcrumb">
-              <li><a href="/static/myhome/index.html">首页</a></li>
+              <li><a href="{% url 'myhome_index' %}">首页</a></li>
               <li><a href="#">{{cate1.name}}</a></li>
             </ol>
       </div>
@@ -113,7 +113,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active mod-pic" id="list-p1">
-                    <a href="/static/myhome/meilanx.html">
+                    <a href="{% url 'myhome_info' %}?id={{g.id}}">
                       <img class="lazy j-modProduct" src="{{g.g_url}}" width="220" height="220">
                     </a>
                   </div>

@@ -73,7 +73,7 @@
                 </div>
             </li>
             <li class="layout-header-service-item layout-header-service-cart" id="layoutHeaderCart">
-                <a class="layout-header-service-link" href="#" data-mtype="wmz_public_yt_cart">
+                <a class="layout-header-service-link" href="{% url 'myhome_carpage' %}" data-mtype="wmz_public_yt_cart">
                     <i class="glyphicon glyphicon-shopping-cart"></i>
                     <span class="layout-header-service-cart-num">0</span>
                 </a>
@@ -88,7 +88,7 @@
             </li>
             {% for cate1 in cate %}
             {% if cate1.upid == 0 %}
-            <li class="layout-header-nav-item"><a href="/static/myhome/list.html" class="layout-header-nav-link">{{cate1.name}}</a></li>
+            <li class="layout-header-nav-item"><a href="{% url 'myhome_list' cate1.id 0 %}" class="layout-header-nav-link">{{cate1.name}}</a></li>
             {% endif %}
             {% endfor %}
 
@@ -103,7 +103,7 @@
        <div class="container">
          <ul class="layout-header-nav-child-list first" >
            <li class="layout-header-nav-child-item">
-             <a class="layout-header-nav-child-link" target="_blank" href="#">
+             <a class="layout-header-nav-child-link" target="_blank" href="{% url 'myhome_car' %}">
                <div class="layout-header-nav-child-box">
                  <img src="/static/myhome/public/img/nav1.jpg" class="layout-header-nav-child-img" alt="PRO 7">
                </div>

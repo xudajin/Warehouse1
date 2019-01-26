@@ -4,6 +4,7 @@ from myadmin import models
 
 # Create your views here.
 def myhome_list(request,cid,bid):
+	cate =models.Cates.objects.all()
 	ob1 = models.Cates.objects.get(id=cid)
 	ob2 =models.Cates. objects.filter(upid=cid)
 	goods=[]
@@ -16,6 +17,6 @@ def myhome_list(request,cid,bid):
         # 根据二级分类对象查询 当前一级分类下二级分类的所有商品
 		goods.append(cate2.goods_set.all())
 
-	content={'cate1':ob1,'cate2':ob2,'goods':goods,'color':bid}
+	content={'cate1':ob1,'cate2':ob2,'goods':goods,'color':bid,'cate':cate}
 
 	return render(request,'myhome/list.html',content)
