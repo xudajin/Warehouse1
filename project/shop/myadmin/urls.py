@@ -33,6 +33,9 @@ urlpatterns = [
     url(r'^verifycode/$', index_views.verifycode,name='myadmin_yzm'),
     url(r'^outlogin/$', index_views.outlogin,name='myadmin_out'),
 
+    url(r'^order/$', index_views.order,name='myadmin_order'),
+
+
 
 
 

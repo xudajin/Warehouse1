@@ -37,10 +37,11 @@ def myhome_login(request):
  
 
 def outlogin(request):
-    del request.session['userinfo'] 
-    return HttpResponse('<script>alert("退出登录");location.href="'+reverse('myhome_index')+'"</script>')
-
-
+    try:
+        del request.session['userinfo'] 
+        return HttpResponse('<script>alert("退出登录");location.href="'+reverse('myhome_index')+'"</script>')
+    except:
+        return HttpResponse('<script>alert("退出登录");location.href="'+reverse('myhome_index')+'"</script>')
 def myhome_register(request):
     if request.method == 'GET':
         return render(request,'myhome/register.html')
@@ -60,6 +61,9 @@ def myhome_register(request):
                     newuser.username=userinfo['username'] 
                     newuser.phone=userinfo['phone'] 
                     newuser.password=make_password(userinfo['password'], None, 'pbkdf2_sha256')
+                    newuser.sex = 1
+                    newuser.age = 0
+                    newuser.head_url ="/static/pics/1543425580.9038017.jpg"
                     newuser.save()
                     return HttpResponse('<script>alert("注册成功，请登录");location.href="'+reverse("myhome_login")+'"</script>')
                 else:

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from myadmin import models
 from django.core.urlresolvers import reverse
+import time,os
 # Create your views here.
 def myhome_info(request):
 	cate =models.Cates.objects.all()
@@ -189,7 +190,21 @@ def myselfinfo(request):
 		users.age = newinfo["age"]
 		users.sex = newinfo["sex"]
 		users.phone = newinfo["phone"]
-		users.save()
+
+		try:
+			file = request.FILES.get('head_url')
+			print(file)
+			if file:
+				os.remove('.'+users.head_url)
+				headurl=upload(file)
+				users.head_url=headurl
+			users.save()
+		except:
+			file = request.FILES.get('head_url')
+			if file:
+				headurl=upload(file)
+				users.head_url=headurl
+			users.save()
 
 		return HttpResponse('<script>alert("修改成功");location.href="'+reverse('myhome_myselfinfo')+'"</script>')
 
@@ -225,3 +240,13 @@ def setdefault(request):
 	select.save()
 
 	return JsonResponse({"set":1})
+
+
+def upload(myfile):
+
+	filename = str(time.time())+"."+myfile.name.split('.').pop()
+	destination = open("./static/pics/"+filename,"wb+")
+	for chunk in myfile.chunks():      
+		destination.write(chunk)  
+	destination.close()
+	return '/static/pics/'+filename

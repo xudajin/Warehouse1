@@ -13,7 +13,6 @@
         <link href="/static/myhome//css/cartstyle.css" rel="stylesheet" type="text/css" />
 
         <link href="/static/myhome//css/jsstyle.css" rel="stylesheet" type="text/css" />
-
         <script type="text/javascript" src="/static/myhome//js/address.js"></script>
 
     </head>
@@ -234,8 +233,6 @@
                             {% endfor %}
 
 
-
-
                             <div class="clear"></div>
                             </div>
 
@@ -369,7 +366,6 @@
                             <label for="user-phone" class="am-form-label">所在地</label>
                             <div class="am-form-content address adds">
 
-
                                 <select data-am-selected class="sheng">
                                     <option value="a" >--请选择省--</option>
                                     {% for i in citys  %}
@@ -383,7 +379,6 @@
                                 <select data-am-selected class="xian">
                                     <option value="a">--请选择县--</option>
                                 </select>
-
 
                             </div>
                         </div>
@@ -407,8 +402,6 @@
             </div>
             <div class="clear"></div>
 
-
-
             <script type="text/javascript">
                 var totalprice = 0
                 $('.sumprice').each(function(){
@@ -417,21 +410,21 @@
                     $('.pay-sum').html(totalprice)
                 })
 
-
-
                 $('.setdefault').click(function(){
                     var setid = $(this).attr('setid')
+                    var my = $(this)
+                    var ins =$('.deftip').clone()
                     $.get('{% url "myhome_setdefault" %}',{"setid":setid},function(data){
                         if(data["set"] == 1){
-                            alert('ok')
+                            my.parents('li').find('.address-left').append(ins)
+                            my.parents('li').siblings('li').find('.address-left').find('ins').remove()
+                            
                         }
                     })
                 })
 
                                     // 
                                     // address-left
-
-
                 $('.adds select').change(function(){
                     var upid = $(this).val()
                     $.get('{% url 'myhome_getcitys' %}',{"upid":upid},function(data){
@@ -508,6 +501,11 @@
                         alert('选择支付方式')
                         return
                     }
+                    else if(!$('.dizhi').val()){
+                        alert('请选择地址')
+                        return
+                    }
+
                     $('.suborder').submit()
                 })
 
@@ -521,10 +519,6 @@
                         }
                    },'json')
                 })
-
-
-
-
             </script>
     </body>
 

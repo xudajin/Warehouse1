@@ -35,10 +35,46 @@ def outlogin(request):
 
 
 
+def order(request):
+    order = models.Order.objects.all()
 
 
+    types = request.GET.get('type')
+    print(types)
+    # 接受关键字
+    search = request.GET.get('search')
+    # 判断用是否搜索内容
+    if types:
+        if types=='all':
+            #根据id username phone
+            # select * from myadmin_users where id like %search% or username like %search% or phone like %search%
+            from django.db.models import Q
+            order = models.Order.objects.filter(Q(id__contains=search)|Q(name__contains=search)|Q(phone__contains=search))
+        elif types=='uname':
+            order = models.Order.objects.filter(name__contains=search)
+        elif types=='uphone':
+            order = models.Order.objects.filter(phone__contains=search)
+        elif types == 'uid':
+            order = models.Order.objects.filter(id__contains=search)
 
+    p = Paginator(order, 4)
+    #一共可以分多少页
+    sumpage=p.num_pages
+    # 取第几页的数据
+    # 接受用户的页码
+    page = int(request.GET.get('p',1))
+    # 第几页的数据
+    page1 = p.page(page)
+    # 判断 如果用输入的页码<=3 显示前五个页码
+    if page<=3:
+        # 页码的迭代序列  [1,2,3,4,5,6,7]
+        prange = p.page_range[:5]
+    elif page+2>=sumpage:
+        prange = p.page_range[-5:]
+    else:
+        prange = p.page_range[page-3:page+2]
 
+    return render(request,'myadmin/order.html',{'userinfo':page1,'prange':prange,'page':page,'sumpage':sumpage})
 
 
 
