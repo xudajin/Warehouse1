@@ -87,24 +87,27 @@ def confirm(request):
 	userobj = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
 	address =userobj.address_set.all()
 	print(address)
-
 	return render(request,'myhome/pay.html',{"login":login,"cargoods":cargoods,"citys":citys,'address':address})
-
 
 
 
 def getcitys(request):
 	upid = request.GET['upid']
 	citys = models.Citys.objects.filter(upid=upid).values()
-
 	return JsonResponse(list(citys),safe=False)
 
 
 def saveaddress(request):
 
 	addinfo = request.GET.dict()
-	print(addinfo)
 	address = models.Address()
+	addr = models.Address.objects.filter(uid=request.session["userinfo"][1]['uid']).count()
+	print(addr)
+	if addr == 0:
+		address.isselect = 1
+	else:
+		address.isselect = 0
+
 	address.name=addinfo['name']
 	address.phone=addinfo['phone']
 	address.sheng=models.Citys.objects.get(id=addinfo['sheng']).name
@@ -114,8 +117,6 @@ def saveaddress(request):
 	address.uid = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
 	address.save()
 	return JsonResponse({'error':0,'msg':'添加成功'})
-
-
 
 
 
@@ -155,17 +156,72 @@ def createorder(request):
 
 	order.total = total
 	order.save()
-	return HttpResponse('<script>alert("ok");location.href="'+reverse('myhome_index')+'"</script>')
-
-
-
-
-
+	return HttpResponse('<script>alert("ok");location.href="'+reverse('myhome_manageorder')+'"</script>')
+	
 
 def deladdr(request):
 	delid =request.GET.get('delid')
 	print(delid)
 	address = models.Address.objects.get(id=delid)
 	address.delete()
-
 	return JsonResponse({'error':0,'msg':'删除成功'})
+
+def myself(request):
+	uid = request.session.get('userinfo')
+	if not uid:		
+		return HttpResponse('<script>alert("没有登录");location.href="'+reverse('myhome_login')+'"</script>')
+	else:
+		pinfo = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
+		return render(request,'myhome/personalcenter.html',{"pinfo":pinfo})
+
+
+
+def myselfinfo(request):
+	if request.method =="GET":
+		pinfo = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
+		print(pinfo.username)
+		return render(request,'myhome/personalinfo.html',{"pinfo":pinfo})
+	elif request.method == "POST":
+		newinfo = request.POST.dict()
+		print(newinfo)
+		users = models.Users.objects.get(id=newinfo["uid"])
+		users.username = newinfo["username"]
+		users.age = newinfo["age"]
+		users.sex = newinfo["sex"]
+		users.phone = newinfo["phone"]
+		users.save()
+
+		return HttpResponse('<script>alert("修改成功");location.href="'+reverse('myhome_myselfinfo')+'"</script>')
+
+
+
+def manageorder(request):
+	users = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
+	order = models.Order.objects.filter(uid=users)
+	orderinfo =models.Orderinfo.objects.all()
+
+	return render(request,'myhome/manageorder.html',{"order":order,"orderinfo":orderinfo})
+
+
+
+def orderdetails(request):
+	orderid =request.GET.get('orderid')
+	order = models.Order.objects.get(id=orderid)
+	orderinfo=order.orderinfo_set.all()
+	print(orderinfo)
+
+	return render(request,'myhome/orderdetails.html',{"orderinfo":orderinfo,"order":order})
+
+
+
+def setdefault(request):
+	setid =request.GET.get("setid")
+	print(setid)
+	users = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
+	addrinfo=users.address_set.all().update(isselect=0)
+	print(addrinfo)
+	select =models.Address.objects.get(id=setid)
+	select.isselect = 1	
+	select.save()
+
+	return JsonResponse({"set":1})

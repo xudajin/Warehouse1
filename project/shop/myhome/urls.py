@@ -31,6 +31,21 @@ urlpatterns = [
 
 
 
+    # 个人中心
+    url(r'^myself/$', info_views.myself,name='myhome_myself'),
+    url(r'^myselfinfo/$', info_views.myselfinfo,name='myhome_myselfinfo'),
+
+    url(r'^manageorder/$', info_views.manageorder,name='myhome_manageorder'),
+
+    url(r'^orderdetails/$', info_views.orderdetails,name='myhome_orderdetails'),
+
+    url(r'^setdefault/$', info_views.setdefault,name='myhome_setdefault'),
+
+
+
+
+
+
 
 
 

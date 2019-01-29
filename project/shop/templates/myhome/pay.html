@@ -93,7 +93,6 @@
                                         <span class="dist">{{i.xian}}</span>
                                         <span class="street">{{i.addinfo}}</span>
                                         </span>
-
                                         </span>
                                     </div>
                                     {% if i.isselect == 1 %}
@@ -107,9 +106,9 @@
                                 <div class="clear"></div>
 
                                 <div class="new-addr-btn">
-                                    <a href="#" class="hidden">设为默认</a>
+                                    
                                     <span class="new-addr-bar hidden">|</span>
-                                    <a href="#">编辑</a>
+                                    <a href="javascript:void(0)" class="setdefault" setid="{{i.id}}">设置默认</a>
                                     <span class="new-addr-bar">|</span>
                                     <a href="javascript:void(0)" class="deladdr1" delid="{{i.id}}">删除</a>
                                 </div>
@@ -279,7 +278,7 @@
                                             <p class="buy-footer-address">
                                                 <span class="buy-line-title">收货人：</span>
                                                 <span class="buy-address-detail">   
-                                                    <span class="buy-user1">{{i.name}} </span>
+                                                    <span class="buy-user1">{{i.name}}</span>
                                                     <span class="buy-phone1">{{i.phone}}</span>
                                                 </span>
                                             </p>
@@ -294,6 +293,8 @@
                                                 {% csrf_token %}
                                                 {% for i in address %}
                                                 {% if i.isselect == 1 %}
+                                                <input type="hidden" name="dizhi" class="dizhi" value="{{i.id}}">
+                                                {% else %}
                                                 <input type="hidden" name="dizhi" class="dizhi" value="{{i.id}}">
                                                 {% endif %}
                                                 {% endfor %}
@@ -417,6 +418,20 @@
                 })
 
 
+
+                $('.setdefault').click(function(){
+                    var setid = $(this).attr('setid')
+                    $.get('{% url "myhome_setdefault" %}',{"setid":setid},function(data){
+                        if(data["set"] == 1){
+                            alert('ok')
+                        }
+                    })
+                })
+
+                                    // 
+                                    // address-left
+
+
                 $('.adds select').change(function(){
                     var upid = $(this).val()
                     $.get('{% url 'myhome_getcitys' %}',{"upid":upid},function(data){
@@ -460,7 +475,7 @@
 
                 $('.caddres').click(function(){
                     var aid =$(this).attr('addid')
-                    $('dizhi').val(aid)
+                    $('.dizhi').val(aid)
 
                     var name =$(this).find('.buy-user').text()
                     var phone =$(this).find('.buy-phone').text()
