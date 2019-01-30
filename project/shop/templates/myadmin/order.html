@@ -38,8 +38,6 @@
                             </div>
                         </div>
                     </form>
-
-
                     <div class="am-u-sm-12">
                         <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
                             <thead>
@@ -53,7 +51,6 @@
                                     <th>支付方式</th>
                                     <th>添加时间</th>
                                     <th>操作</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,11 +60,10 @@
                                     <td>{{i.phone}}</td>
                                     <td>{{i.name}}</td>
                                     <td>{{i.addinfo}}</td>
-                                    <td>{{i.total}}</td>  
+                                    <td class="total">{{i.total}}</td>  
                                     <td>{{i.wl}}</td>
                                     <td>{{i.pay}}</td>                                         
                                     <td>{{i.createtime}}</td>
-
                                     <td>
                                         <div class="tpl-table-black-operation">
                                             <a href="">
@@ -78,7 +74,8 @@
                                             </a>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr>   
+
                                 {% endfor %}
                                 <script type="text/javascript">
                                     $('.changes').change(function(){
@@ -89,7 +86,6 @@
                                         },'json')
                                     })
                                 </script>
-                                <!-- more data -->
                             </tbody>
                         </table>
                     </div>

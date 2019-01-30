@@ -89,6 +89,12 @@ def order(request):
 
 
 
+
+
+
+
+
+
 def verifycode(request):
     #引入绘图模块
     from PIL import Image, ImageDraw, ImageFont

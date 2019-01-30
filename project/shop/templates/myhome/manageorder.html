@@ -42,9 +42,7 @@
 								<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 						</ul>
 						</div>
-
 						<!--悬浮搜索框-->
-
 						<div class="nav white">
 							<div class="logoBig">
 								<li><img src="/static/myhome//images/logobig.png" /></li>
@@ -58,33 +56,31 @@
 								</form>
 							</div>
 						</div>
-
 						<div class="clear"></div>
 					</div>
 				</div>
 			</article>
 		</header>
             <div class="nav-table">
-					   <div class="long-title"><span class="all-goods">全部分类</span></div>
-					   <div class="nav-cont">
-							<ul>
-								<li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
-							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
-						</div>
+			   <div class="long-title"><span class="all-goods">全部分类</span></div>
+			   <div class="nav-cont">
+					<ul>
+						<li class="index"><a href="#">首页</a></li>
+                        <li class="qc"><a href="#">闪购</a></li>
+                        <li class="qc"><a href="#">限时抢</a></li>
+                        <li class="qc"><a href="#">团购</a></li>
+                        <li class="qc last"><a href="#">大包装</a></li>
+					</ul>
+				    <div class="nav-extra">
+				    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+				    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+				    </div>
+				</div>
 			</div>
 			<b class="line"></b>
 		<div class="center">
 			<div class="col-main">
 				<div class="main-wrap">
-
 					<div class="user-order">
 
 						<!--标题 -->
@@ -102,7 +98,6 @@
 								<li><a href="#tab4">待收货</a></li>
 								<li><a href="#tab5">待评价</a></li>
 							</ul>
-
 							<div class="am-tabs-bd">
 								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
 									<div class="order-top">
@@ -116,29 +111,27 @@
 											<td class="td-inner">数量</td>
 										</div>
 										<div class="th th-operation">
-											<td class="td-inner">商品操作</td>
+											<td class="td-inner">订单状态</td>
 										</div>
 										<div class="th th-amount">
 											<td class="td-inner">合计</td>
 										</div>
 										<div class="th th-status">
-											<td class="td-inner">交易状态</td>
+											<td class="td-inner">订单详情</td>
 										</div>
 										<div class="th th-change">
-											<td class="td-inner">交易操作</td>
+											<td class="td-inner">订单操作</td>
 										</div>
 									</div>
-
 									<div class="order-main">
-										<div class="order-list">
-											
+										<div class="order-list">				
 											<!--交易成功-->
 											{% for i in order %}
 											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="javascript:;">{{i.id}}</a></div>										
-												</div>
-												
+													<div class="dd-num">订单编号：<a href="javascript:;">{{i.id}}</a>
+													</div>										
+												</div>			
 												<div class="order-content">
 													<div class="order-left">
 														{% for o in orderinfo%}
@@ -191,7 +184,7 @@
 																</div>
 															</li>
 															<li class="td td-change">
-																<div class="am-btn am-btn-danger anniu">
+																<div class="am-btn am-btn-danger anniu delorder" doid={{i.id}}>
 																	删除订单</div>
 															</li>
 														</div>
@@ -207,6 +200,19 @@
 						</div>
 					</div>
 				</div>
+				<script type="text/javascript">
+					$('.delorder').click(function(){
+						var del = $(this)
+						var doid = $(this).attr("doid")
+						$.get('{% url "myhome_delorder" %}',{"doid":doid},function(data){
+							if(data["del"] == 0){
+								del.parents('.order-status5').remove()
+							}
+
+						},'json')
+
+					})
+				</script>
 				<!--底部-->
 				<div class="footer">
 					<div class="footer-hd">
@@ -235,7 +241,7 @@
 			<aside class="menu">
 				<ul>
 					<li class="person active">
-						<a href="index.html"><i class="am-icon-user"></i>个人中心</a>
+						<a href="{% url 'myhome_myself' %}"><i class="am-icon-user"></i>个人中心</a>
 					</li>
 					<li class="person">
 						<p><i class="am-icon-newspaper-o"></i>个人资料</p>
@@ -283,10 +289,8 @@
 						</ul>
 					</li>
 				</ul>
-
 			</aside>
 		</div>
-
 	</body>
 
 </html>

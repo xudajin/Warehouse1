@@ -409,7 +409,6 @@
                     console.log(totalprice)
                     $('.pay-sum').html(totalprice)
                 })
-
                 $('.setdefault').click(function(){
                     var setid = $(this).attr('setid')
                     var my = $(this)
@@ -417,14 +416,11 @@
                     $.get('{% url "myhome_setdefault" %}',{"setid":setid},function(data){
                         if(data["set"] == 1){
                             my.parents('li').find('.address-left').append(ins)
-                            my.parents('li').siblings('li').find('.address-left').find('ins').remove()
-                            
+                            my.parents('li').siblings('li').find('.address-left').find('ins').remove()                           
                         }
                     })
                 })
 
-                                    // 
-                                    // address-left
                 $('.adds select').change(function(){
                     var upid = $(this).val()
                     $.get('{% url 'myhome_getcitys' %}',{"upid":upid},function(data){
@@ -445,7 +441,6 @@
                     },'json')
 
                 })
-
 
                 $('.save').click(function(){
                     var adddata = {}
@@ -491,7 +486,6 @@
                     $('.zhifu').val(paytype)
                 })
 
-
                 $('#J_Go').click(function(){
                     if(!$('.wuliu').val()){
                         alert('请选择物流')
@@ -521,5 +515,4 @@
                 })
             </script>
     </body>
-
 </html>

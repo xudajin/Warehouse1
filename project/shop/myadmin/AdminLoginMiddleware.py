@@ -19,10 +19,7 @@ class AdminLoginMiddleware:
             # 判断有没有登录 如果没有登返回到登录页面
             if request.session.get('adminuser','') == '':
                 return HttpResponse('<script>alert("请先登录");location.href="/myadmin/logoin";</script>')
-
-       
-
-
+     
 
         response = self.get_response(request)
         return response

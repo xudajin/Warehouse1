@@ -35,6 +35,8 @@ urlpatterns = [
 
     url(r'^order/$', index_views.order,name='myadmin_order'),
 
+    
+
 
 
 

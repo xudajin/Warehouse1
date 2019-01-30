@@ -29,8 +29,6 @@ urlpatterns = [
 
     url(r'^deladdr/$', info_views.deladdr,name='myhome_deladdr'),
 
-
-
     # 个人中心
     url(r'^myself/$', info_views.myself,name='myhome_myself'),
     url(r'^myselfinfo/$', info_views.myselfinfo,name='myhome_myselfinfo'),
@@ -41,23 +39,16 @@ urlpatterns = [
 
     url(r'^setdefault/$', info_views.setdefault,name='myhome_setdefault'),
 
+    url(r'^delorder/$', info_views.delorder,name='myhome_delorder'),
 
 
-
-
-
-
-
-
+    url(r'^myhome_order_pay/$', info_views.myhome_order_pay,name='myhome_order_pay'),
 
     
 
-
-
-
-
-
-
+    # 支付回调
+    url(r'^order/pay_result/',info_views.myhome_pay_result,name="myhome_pay_result"),
+    
 
 
 

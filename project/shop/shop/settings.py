@@ -129,3 +129,26 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+
+
+# APPID
+# 沙箱APPID，生产环境须更改为应用APPID。
+ALIPAY_APPID = "2016092400589072" 
+
+# 网关
+# 沙箱网关，生产环境须更改为正式网关。
+ALIPAY_URL = "https://openapi.alipaydev.com/gateway.do" 
+# 正式网关，开发环境勿使用。
+# ALIPAY_URL = "https://openapi.alipay.com/gateway.do" 
+
+# 回调通知地址
+# 如果只可以内网访问开发服务器
+ALIPAY_NOTIFY_URL = "http://t23523593l.iok.la/order/pay_result/" 
+# 支付后的跳转地址
+# ALIPAY_RETURN_URL = 'http://mv23102380.imwork.net/order/pay_success/'
+
+# 应用私钥
+APP_PRIVATE_KEY_PATH = os.path.join(BASE_DIR, 'keys/app_private_key.txt')
+# 支付宝公钥
+ALIPAY_PUBLIC_KEY_PATH = os.path.join(BASE_DIR, 'keys/alipay_public_key.txt')

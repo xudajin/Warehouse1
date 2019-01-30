@@ -90,13 +90,19 @@ def edituser(request):
 		uinfo.sex=userinfo['sex']
 
 		file = request.FILES.get('head_url')
-		if file:
-			os.remove('.'+uinfo.head_url)
-			headurl=upload(file)
-			uinfo.head_url=headurl
-		uinfo.save()
-		return HttpResponse(("<script>alert('修改成功！');location.href='/myadmin/vipuser/'</script>"))
-
+		try:
+			if file:
+				os.remove('.'+uinfo.head_url)
+				headurl=upload(file)
+				uinfo.head_url=headurl
+			uinfo.save()
+			return HttpResponse(("<script>alert('修改成功！');location.href='/myadmin/vipuser/'</script>"))
+		except:
+			if file:
+				headurl=upload(file)
+				uinfo.head_url=headurl
+			uinfo.save()
+			return HttpResponse(("<script>alert('修改成功！');location.href='/myadmin/vipuser/'</script>"))
 
 def respwd(request):
 	uid=request.GET.get("id")
