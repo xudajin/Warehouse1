@@ -38,13 +38,18 @@ urlpatterns = [
     url(r'^orderdetails/$', info_views.orderdetails,name='myhome_orderdetails'),
 
     url(r'^setdefault/$', info_views.setdefault,name='myhome_setdefault'),
-
-    url(r'^delorder/$', info_views.delorder,name='myhome_delorder'),
-
-
-    url(r'^myhome_order_pay/$', info_views.myhome_order_pay,name='myhome_order_pay'),
+    # url(r'^setaddress/$', info_views.setaddress,name='myhome_setaddress'),
 
     
+    
+
+
+
+
+    url(r'^delorder/$', info_views.delorder,name='myhome_delorder'),
+    
+
+    url(r'^myhome_order_pay/$', info_views.myhome_order_pay,name='myhome_order_pay'),
 
     # 支付回调
     url(r'^order/pay_result/',info_views.myhome_pay_result,name="myhome_pay_result"),

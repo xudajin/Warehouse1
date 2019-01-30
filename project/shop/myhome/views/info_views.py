@@ -352,5 +352,11 @@ def upload(myfile):
 	return '/static/pics/'+filename
 
 
+# def setaddress(request):
+# 	users = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
+# 	addr =models.Address.objects.filter(uid=users)
+# 	print(addr)
+# 	return render(request,'myhome/setaddress.html',{"addr":addr})
+
 
 
