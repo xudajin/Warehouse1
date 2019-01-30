@@ -304,6 +304,7 @@ def manageorder(request):
 	users = models.Users.objects.get(id=request.session["userinfo"][1]['uid'])
 	order = models.Order.objects.filter(uid=users)
 	orderinfo =models.Orderinfo.objects.all()
+	
 
 	return render(request,'myhome/manageorder.html',{"order":order,"orderinfo":orderinfo})
 

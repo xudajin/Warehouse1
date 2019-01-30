@@ -233,18 +233,29 @@
 														<span>{{i.num}}</span>
 													</div>
 												</li>
-												<li class="td td-operation">
+												<li class="td td-operation" >
 													<div class="item-operation">
 														退款/退货
 													</div>
 												</li>
 												{% endfor %}
-												<li class="td td-operation">
+												<li class="td td-operation" style="width:90px ">
 													<div class="item-operation">
 														{{order.total}}
-													</div>
+													</div>	
 												</li>
-
+												<li class="td td-operation">
+													{% if order.status == 1 %}
+													<div class="item-operation">
+														已付款
+													</div>
+													{% else %}
+													<div class="item-operation">
+														未付款
+													</div>
+													{% endif %}	
+												</li>
+														
 											</ul>
 
 										</div>

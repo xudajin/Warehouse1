@@ -93,12 +93,13 @@
 
 							<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
 								<li class="am-active"><a href="#tab1">所有订单</a></li>
-								<li><a href="#tab2">待付款</a></li>
-								<li><a href="#tab3">待发货</a></li>
+								<li><a href="#tab2">已付款</a></li>
+								<li><a href="#tab3">未付款</a></li>
 								<li><a href="#tab4">待收货</a></li>
 								<li><a href="#tab5">待评价</a></li>
 							</ul>
 							<div class="am-tabs-bd">
+								<!-- all -->
 								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
 									<div class="order-top">
 										<div class="th th-item">
@@ -162,14 +163,21 @@
 																	<span>{{o.num}}</span>
 																</div>
 															</li>
+															{% endif %}
+															{% endfor %}
 															<li class="td td-operation">
+																{% if i.status == 1 %}
 																<div class="item-operation">
-																	
+																	已支付	
 																</div>
+																{% else %}
+																<div class="item-operation">			
+																	未付款	
+																</div>
+																{% endif %}
 															</li>
 														</ul>
-														{% endif %}
-														{% endfor %}		
+																
 													</div>
 													<div class="order-right">
 														<li class="td td-amount">
@@ -191,6 +199,209 @@
 													</div>
 												</div>
 											</div>
+											{% endfor %}
+											
+										</div>
+									</div>
+								</div>
+								<!-- 已付款 -->
+								<div class="am-tab-panel am-fade am-in am-active" id="tab2">
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-price">
+											<td class="td-inner">单价</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div class="th th-operation">
+											<td class="td-inner">订单状态</td>
+										</div>
+										<div class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div class="th th-status">
+											<td class="td-inner">订单详情</td>
+										</div>
+										<div class="th th-change">
+											<td class="td-inner">订单操作</td>
+										</div>
+									</div>
+									<div class="order-main">
+										<div class="order-list">				
+											<!--交易成功-->
+											{% for i in order %}
+											{% if i.status == 1 %}
+											<div class="order-status5">
+												<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;">{{i.id}}</a>
+													</div>										
+												</div>			
+												<div class="order-content">
+													<div class="order-left">
+														{% for o in orderinfo%}
+														{% if o.orderid.id == i.id %}
+														<ul class="item-list">	
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img src="{{o.gid.g_url}}" class="itempic J_ItemImg" style="width: 80px">
+																	</a>
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<a href="#">
+																			<p>{{o.gid.title}}</p>
+																			<p class="info-little">颜色：天空色
+																		</a>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-price">
+																<div class="item-price">
+																	{{o.price}}
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>{{o.num}}</span>
+																</div>
+															</li>
+															{% endif %}
+															{% endfor %}
+															<li class="td td-operation">
+																<div class="item-operation">
+																	已付款
+																</div>
+															</li>
+														</ul>
+														
+													</div>
+													<div class="order-right">
+														<li class="td td-amount">
+															<div class="item-amount">
+																<strong>合计:</strong> <br><br><strong>{{i.total}}</strong>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="order-info"><a href="{% url 'myhome_orderdetails' %}?orderid={{i.id}}">订单详情</a>
+																</div>
+															</li>
+															<li class="td td-change">
+																<div class="am-btn am-btn-danger anniu delorder" doid={{i.id}}>
+																	删除订单</div>
+															</li>
+														</div>
+													</div>
+												</div>
+											</div>
+											{% endif %}
+											{% endfor %}
+											
+										</div>
+									</div>
+								</div>
+								<!-- 未付款 -->
+								<div class="am-tab-panel am-fade am-in am-active" id="tab3">
+									<div class="order-top">
+										<div class="th th-item">
+											<td class="td-inner">商品</td>
+										</div>
+										<div class="th th-price">
+											<td class="td-inner">单价</td>
+										</div>
+										<div class="th th-number">
+											<td class="td-inner">数量</td>
+										</div>
+										<div class="th th-operation">
+											<td class="td-inner">订单状态</td>
+										</div>
+										<div class="th th-amount">
+											<td class="td-inner">合计</td>
+										</div>
+										<div class="th th-status">
+											<td class="td-inner">订单详情</td>
+										</div>
+										<div class="th th-change">
+											<td class="td-inner">订单操作</td>
+										</div>
+									</div>
+									<div class="order-main">
+										<div class="order-list">				
+											<!--交易成功-->
+											{% for i in order %}
+											{% if i.status == 0 %}
+											<div class="order-status5">
+												<div class="order-title">
+													<div class="dd-num">订单编号：<a href="javascript:;">{{i.id}}</a>
+													</div>										
+												</div>			
+												<div class="order-content">
+													<div class="order-left">
+														{% for o in orderinfo%}
+														{% if o.orderid.id == i.id %}
+														<ul class="item-list">	
+															<li class="td td-item">
+																<div class="item-pic">
+																	<a href="#" class="J_MakePoint">
+																		<img src="{{o.gid.g_url}}" class="itempic J_ItemImg" style="width: 80px">
+																	</a>
+																</div>
+																<div class="item-info">
+																	<div class="item-basic-info">
+																		<a href="#">
+																			<p>{{o.gid.title}}</p>
+																			<p class="info-little">颜色：天空色
+																		</a>
+																	</div>
+																</div>
+															</li>
+															<li class="td td-price">
+																<div class="item-price">
+																	{{o.price}}
+																</div>
+															</li>
+															<li class="td td-number">
+																<div class="item-number">
+																	<span>{{o.num}}</span>
+																</div>
+															</li>
+															{% endif %}
+															{% endfor %}
+															<li class="td td-operation">
+																<div class="item-operation">
+																	未付款
+																</div>
+															</li>	
+														</ul>
+														
+															
+													</div>
+													<div class="order-right">	
+														<li class="td td-amount">
+															<div class="item-amount">
+																<strong>合计:</strong> <br><br><strong>{{i.total}}</strong>
+															</div>
+														</li>
+														<div class="move-right">
+															<li class="td td-status">
+																<div class="item-status">
+																	<p class="order-info"><a href="{% url 'myhome_orderdetails' %}?orderid={{i.id}}">订单详情</a>
+																</div>
+															</li>
+															<li class="td td-change">
+																<div class="am-btn am-btn-danger anniu delorder" doid={{i.id}}>
+																	删除订单</div>
+															</li>
+														</div>
+													</div>
+												</div>
+											</div>
+											{% endif %}
 											{% endfor %}
 											
 										</div>
