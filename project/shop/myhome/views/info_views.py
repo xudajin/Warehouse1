@@ -242,14 +242,6 @@ def Get_AliPay_Object():
 
 
 
-
-
-
-
-
-
-
-
 def deladdr(request):
 	delid =request.GET.get('delid')
 	print(delid)
