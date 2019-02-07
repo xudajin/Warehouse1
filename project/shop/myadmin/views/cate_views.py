@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 from .. import models
 from shop.settings import BASE_DIR
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import permission_required
+
 # Create your views here.
 
 def tab():
@@ -15,7 +17,7 @@ def tab():
     return cates    
 
 
-
+@permission_required("myadmin.insert_cates",raise_exception = True)
 def addcate(request):
 	if request.method == 'GET':
 		cates=models.Cates.objects.all()
@@ -41,13 +43,14 @@ def addcate(request):
 			c.save()
 		return HttpResponse(('<script>alert("添加成功");location.href="/myadmin/addcate/"</script>'))
 
-
+@permission_required("myadmin.show_cates",raise_exception = True)
 def catelist(request):
 	cate = tab()
 	# cate=models.Cates.objects.all()
 	# print(cate)
 	return render(request,'myadmin/cate/catelist.html',{"cate":cate})
-
+	
+@permission_required("myadmin.del_cates",raise_exception = True)
 def delcate(request):
 	pid = int(request.GET.get('pid'))
 	count=models.Cates.objects.filter(upid=pid).count()
@@ -57,7 +60,7 @@ def delcate(request):
 		c = models.Cates.objects.get(id=pid)
 		c.delete()
 		return JsonResponse({'msg':1})
-
+@permission_required("myadmin.edit_cates",raise_exception = True)
 def editcate(request):
     # 接受id和name
     cid = int(request.GET.get('id'))

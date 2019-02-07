@@ -6,8 +6,9 @@ from .. import models
 import time,os
 from shop.settings import BASE_DIR
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import permission_required
 # Create your views here.
-
+@permission_required("myadmin.show_users",raise_exception = True)
 def vipuser(request):
 	userinfo=models.Users.objects.all().exclude(status=3)
 	types = request.GET.get('type')
@@ -46,6 +47,8 @@ def vipuser(request):
 		prange = p.page_range[page-3:page+2]
 	return render(request,'myadmin/table-list.html',{'userinfo':page1,'prange':prange,'page':page,'sumpage':sumpage})
 
+
+@permission_required("myadmin.insert_users",raise_exception = True)
 def adduser(request):
 	if request.method=='GET':
 		return render(request,'myadmin/adduser.html')
@@ -65,6 +68,7 @@ def adduser(request):
 		except :
 			return HttpResponse("<script>alert('失败！');location.href=''</script>")
 
+@permission_required("myadmin.del_users",raise_exception = True)
 def deluser(request):
 	uid=request.GET.dict()
 	uid=uid["id"]
@@ -74,7 +78,7 @@ def deluser(request):
 	userinfo.save()
 	return HttpResponse(("<script>alert('删除成功！');location.href='/myadmin/vipuser/'</script>"))
 
-
+@permission_required("myadmin.edit_users",raise_exception = True)
 def edituser(request):
 	uid=request.GET.get("id")
 	if request.method == 'GET':

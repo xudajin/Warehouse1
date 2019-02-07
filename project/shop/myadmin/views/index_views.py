@@ -5,31 +5,47 @@ from django.core.urlresolvers import reverse
 from .. import models
 from shop.settings import BASE_DIR
 from django.core.paginator import Paginator
+from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.decorators import permission_required
+
+
 # Create your views here.
 def index(request):
 	return render(request,'myadmin/index.html')
 
 
 def myadminLogin(request):
-	if request.method == 'GET':
-		return render(request,'myadmin/login.html')
-	elif request.method == 'POST':
-		user = request.POST.dict()
-		print(user)
-		if user['name'] == 'admin' and user['pwd'] == '123456':
-            # 判断验证码
-			if user['yzm'].upper() == request.session['verifycode'].upper():
-				request.session['adminuser']={'vipuser':user['name'],'uid':1}
-				return HttpResponse('<script>alert("登陆成功");location.href="'+reverse('myadmin_index')+'"</script>')
-			else:
-				return HttpResponse('<script>alert("验证码错误，重新输入");location.href="'+reverse('myadmin_login')+'"</script>')
-		else:
-			return HttpResponse('<script>alert("账号或密码错误");location.href="'+reverse('myadmin_login')+'"</script>')
+    if request.method == 'GET':
+        return render(request,'myadmin/login.html')
+    elif request.method == 'POST':
+        if request.POST['yzm'].upper() != request.session['verifycode'].upper():
+            return HttpResponse('<script>alert("验证码错误，重新输入");location.href="'+reverse('myadmin_login')+'"</script>')
+
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user :
+            login(request,user)
+            return HttpResponse('<script>location.href="'+reverse('myadmin_index')+'"</script>')
+
+        return HttpResponse('<script>alert("账号或密码错误");location.href="'+reverse('myadmin_login')+'"</script>')
+
+
+		# print(user)
+		# if user['name'] == 'admin' and user['pwd'] == '123456':
+  #           # 判断验证码
+		# 	if user['yzm'].upper() == request.session['verifycode'].upper():
+		# 		request.session['adminuser']={'vipuser':user['name'],'uid':1}
+		# 		return HttpResponse('<script>alert("登陆成功");location.href="'+reverse('myadmin_index')+'"</script>')
+		# 	else:
+		# 		return HttpResponse('<script>alert("验证码错误，重新输入");location.href="'+reverse('myadmin_login')+'"</script>')
+		# else:
+		# 	return HttpResponse('<script>alert("账号或密码错误");location.href="'+reverse('myadmin_login')+'"</script>')
 
 
 def outlogin(request):
-	del request.session['adminuser']
-	return HttpResponse('<script>alert("退出成功");location.href="'+reverse('myadmin_login')+'"</script>')
+    logout(request)
+    return HttpResponse('<script>alert("退出成功");location.href="'+reverse('myadmin_login')+'"</script>')
 
 
 

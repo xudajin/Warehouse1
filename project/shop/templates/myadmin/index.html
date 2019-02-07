@@ -206,7 +206,7 @@
                         <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                     </a>
                 </li>
-
+                {% if request.user.is_superuser  %}             
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 权限管理
@@ -224,11 +224,10 @@
                             </a>
                         </li>                       
                     </ul>
-
+                {% endif %}
  
 
-
-                  
+                {% if request.user.is_superuser or 'myadmin.show_users' in perms %}
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 用户管理
@@ -246,7 +245,9 @@
                             </a>
                         </li>                       
                     </ul>
+                {% endif %}
 
+                {% if request.user.is_superuser or 'myadmin.show_cates' in perms %}
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 商品分类
@@ -264,8 +265,9 @@
                             </a>
                         </li>
                     </ul>
+                {% endif %}
 
-
+                {% if request.user.is_superuser or 'myadmin.show_goods' in perms %}
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 商品管理
@@ -284,7 +286,8 @@
                         </li> 
 
                     </ul>
-
+                {% endif %}
+                {% if request.user.is_superuser or 'myadmin.show_order' in perms %}
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
                         <i class="am-icon-table sidebar-nav-link-logo"></i> 订单管理
@@ -297,8 +300,10 @@
                             </a>    
                         </li>  
                     </ul>
+                {% endif %}
                     
             </ul>
+                }
         </div>
 
 
