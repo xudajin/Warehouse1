@@ -1,0 +1,100 @@
+{% extends 'myadmin/index.html' %}
+
+{% block cont %}
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">组编辑</div>
+                    <div class="widget-function am-fr">
+                        <a href="javascript:;" class="am-icon-cog"></a>
+                    </div>
+                </div>
+                <div class="widget-body am-fr">
+                    <form id='myform'  action="{% url 'auth_group_edit' %}?id={{info.id}}" class="am-form tpl-form-line-form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                         <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">组名
+                                <span class="tpl-form-line-small-title">Title</span></label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="groupname" value="{{info.name}}" class="tpl-form-input" >
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">权限
+                                <span class="tpl-form-line-small-title">Title</span></label>
+                            <div class="am-u-sm-10">
+                                <div style="float:left;text-align:center;">
+                                    <p>可用权限</p>
+                                    <select id="select1" multiple="multiple" style="
+                                    width: 300px;height: 200px;border:solid black 1px">
+                                    {% for i in perms %}
+                                    <option value="{{i.id}}">{{i}}</option>
+                                    {% endfor %}
+
+                                        
+                                    </select>
+                                    <p style="color:black;"><button id='add_all' type="button">全选>> </button></p>     
+                                </div>
+                                <div style="float:left;width: 50px;height: 200px">
+                                    <ul style="margin-top:100px;text-align: center;">
+                                        <li style="color:black"><button id="add" type="button"> >> </button></li>
+                                        <br>
+                                        <li style="color:black"><button id="remove" type="button"> << </button></li>
+                                    </ul>
+                                </div>
+                                <div style="float:left;text-align:center;">
+                                    <p>已选中权限</p>
+                                    <select id="select2" name='perm' multiple="multiple" style="
+                                    width: 300px;height: 200px; border:solid black 1px">
+                                    {% for i in info.permissions.all %}
+                                    <option value="{{i.id}}">{{i}}</option>
+                                    {% endfor %}           
+                                    </select>
+                                    <p style="color:black;"><button id='remove_all' type="button">全部删除</button></p>     
+                                </div>        
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $('#add').click(function(){
+                                $('#select1 option:selected').appendTo('#select2');
+                            })
+                            $('#remove').click(function(){
+                                $('#select2 option:selected').appendTo('#select1');
+                            })
+                            $('#add_all').click(function(){
+                                $('#select1 option').appendTo('#select2');
+                            })
+                            $('#remove_all').click(function(){
+                                $('#select2 option').appendTo('#select1');
+                            })
+
+                            $('#myform').submit(function(){
+
+                                $('#select2 option').each(function(){
+                                    this.selected = true
+           
+                                })
+                                // return false;
+                            })
+                        
+                        </script>
+
+                       
+
+                                               
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button  class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</div>
+{% endblock %}

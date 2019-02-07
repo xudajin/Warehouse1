@@ -7,15 +7,24 @@ from django.db import models
 # 用户模型
 class Users(models.Model):
     # 用户名  密码  手机号  性别 年龄 状态 添加时间  头像
-	username = models.CharField(max_length=50)
-	password = models.CharField(max_length=100)
-	phone = models.CharField(max_length=11)
-	sex = models.CharField(max_length=1)
-	age = models.CharField(max_length=3)
-	head_url = models.CharField(max_length=100)
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=100)
+    phone = models.CharField(max_length=11)
+    sex = models.CharField(max_length=1)
+    age = models.CharField(max_length=3)
+    head_url = models.CharField(max_length=100)
     # 0 正常 1   2
-	status = models.IntegerField(default=0)
-	addtime=models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(default=0)
+    addtime=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        permissions = (
+            ("show_users","查看会员管理"),
+            ("insert_users","添加会员"),
+            ("edit_users","修改会员"),
+            ("del_users","删除会员"),
+        )
+
 
 
 
@@ -24,6 +33,15 @@ class Cates(models.Model):
     name = models.CharField(max_length=50)
     upid = models.IntegerField()
     paths = models.CharField(max_length=50)
+
+    class Meta:
+        permissions = (
+            ("show_cates","查看商品分类管理"),
+            ("insert_cates","添加商品分类"),
+            ("edit_cates","修改商品分类"),
+            ("del_cates","删除商品分类"),
+        )
+
 
 
 
@@ -41,8 +59,16 @@ class Goods(models.Model):
     status = models.IntegerField(default=0)
     clicknum = models.IntegerField(default=0)
     addtime = models.DateTimeField(auto_now_add=True)
-
     cateid=models.ForeignKey(to="Cates",to_field="id")
+
+    class Meta:
+        permissions = (
+            ("show_goods","查看商品管理"),
+            ("insert_goods","添加商品"),
+            ("edit_goods","修改商品"),
+            ("del_goods","删除商品"),
+        )
+
 
 
 
@@ -52,9 +78,6 @@ class Car(models.Model):
     gid=models.ForeignKey(to="Goods",to_field="id")
     num = models.IntegerField()
     uid=models.ForeignKey(to="Users",to_field="id")
-
-
-
 
 
 
@@ -71,6 +94,15 @@ class Address(models.Model):
 
     isselect = models.IntegerField(default=0)
 
+    class Meta:
+        permissions = (
+            ("show_address","查看地址管理"),
+            ("insert_address","添加地址"),
+            ("edit_address","修改地址"),
+            ("del_address","删除地址"),
+        )
+
+
 class Citys(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField()
@@ -78,6 +110,8 @@ class Citys(models.Model):
 
     class Meta():
         db_table='citys'
+
+
 
 
 
@@ -99,6 +133,15 @@ class Order(models.Model):
     createtime = models.DateTimeField(auto_now_add=True)
 
     paytime = models.DateTimeField(null=True)
+
+    class Meta:
+        permissions = (
+            ("show_order","查看订单管理"),
+            ("insert_order","添加订单"),
+            ("edit_order","修改订单"),
+            ("del_order","删除订单"),
+        )
+
 
 
 class Orderinfo(models.Model):
