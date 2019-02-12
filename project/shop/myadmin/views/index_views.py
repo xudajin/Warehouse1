@@ -93,17 +93,12 @@ def order(request):
     return render(request,'myadmin/order.html',{'userinfo':page1,'prange':prange,'page':page,'sumpage':sumpage})
 
 
-
-
-
-
-
-
-
-
-
-
-
+def delorder(request):
+    doid = request.GET.get('doid')
+    delorder = models.Order.objects.get(id=doid)
+    print(delorder.name)
+    delorder.delete()
+    return JsonResponse({"del":0,"msg":"删除成功"})
 
 
 

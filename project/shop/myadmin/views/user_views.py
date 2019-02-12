@@ -8,6 +8,8 @@ from shop.settings import BASE_DIR
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import permission_required
 # Create your views here.
+
+
 @permission_required("myadmin.show_users",raise_exception = True)
 def vipuser(request):
 	userinfo=models.Users.objects.all().exclude(status=3)

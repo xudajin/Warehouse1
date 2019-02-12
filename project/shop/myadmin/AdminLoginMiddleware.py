@@ -18,7 +18,7 @@ class AdminLoginMiddleware:
         if re.match('/myadmin/',path) and path not in lists:
             # 判断有没有登录 如果没有登返回到登录页面
             if not request.session.get("_auth_user_id",None):
-                return HttpResponse('<script>alert("请先登录");location.href="/myadmin/logoin";</script>')
+                return HttpResponse('<script>alert("请先登录ooo");location.href="/myadmin/logoin";</script>')
      
 
         response = self.get_response(request)

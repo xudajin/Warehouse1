@@ -209,7 +209,7 @@ def myhome_pay_result(request):
         print(post_dict)
         out_trade_no = post_dict['out_trade_no']
 
-        # 修改订单状态
+         # 修改订单状态
         models.Order.objects.filter(id=out_trade_no).update(status=1)
         print('------------------结束------------------')
         # 修改订单状态：获取订单号
@@ -218,9 +218,11 @@ def myhome_pay_result(request):
         params = request.GET.dict()
         sign = params.pop('sign', None)
         status = alipay.verify(params, sign)
-        print('==================开始==================')
-        print('GET验证', status)
-        print('==================结束==================')
+        # print('==================开始==================')
+        # print('GET验证', status)
+        # print('==================结束==================')
+       
+        
         return HttpResponse('<script>alert("支付成功");支付完成</script>')
 
 

@@ -68,6 +68,12 @@
                             $('#remove_all').click(function(){
                                 $('#select2 option').appendTo('#select1');
                             })
+                            $('#select1').dblclick(function(){
+                                $('option:selected',this).appendTo('#select2');
+                            })
+                            $('#select2').dblclick(function(){
+                                $('option:selected',this).appendTo('#select1');
+                            })
 
                             $('#myform').submit(function(){
 
@@ -79,10 +85,7 @@
                             })
                         
                         </script>
-
-                       
-
-                                               
+                        
                         <div class="am-form-group">
                             <div class="am-u-sm-9 am-u-sm-push-3">
                                 <button  class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button></div>
